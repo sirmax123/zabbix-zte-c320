@@ -42,6 +42,9 @@ If everething is OK, continue to the Zabbix Server configuration
 * Export template `Template-ZTE-C320-ONU.xml`
 * Add template to host where script is installed
 
+# Cron
+* Configure cron (or any other periodic execution like systemd timer) to execute script periodicaly based on `cron/zte` example file.
+
 
 # License
 
