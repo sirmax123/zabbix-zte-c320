@@ -1,0 +1,15 @@
+{
+    "devices": [
+        {
+            "name": "ZTE C320 Donec",
+            "config": {
+                "host": "172.31.0.1",
+                "port": 23,
+                "auth_username": "replaceme",
+                "auth_password": "replaceme",
+                "platform": "cisco_iosxe",
+                "transport": "telnet"
+            }
+        }
+    ]
+}

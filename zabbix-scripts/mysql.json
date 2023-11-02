@@ -1,0 +1,7 @@
+{
+    "pon_table": "pon_c320",
+    "host": "localhost",
+    "user": "nmsuser-to-be-replaced",
+    "password": "nmspassword-to-be-replaced",
+    "database": "databasename-to-be-replaced"
+}
