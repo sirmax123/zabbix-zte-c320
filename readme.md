@@ -38,7 +38,7 @@ And check file `/var/log/zte-olt.err` for errors.
 
 If everething is OK, continue to the Zabbix Server configuration
 
-#Zabbix Server
+# Zabbix Server
 * Export template `Template-ZTE-C320-ONU.xml`
 * Add template to host where script is installed
 
