@@ -1,0 +1,1 @@
+*/5 * * * * root timeout 299 /usr/local/zabbix-scripts/zte_olt.py -c /usr/local/zabbix-scripts/config.json  -o /etc/zabbix/zabbix_agentd.d  -m /usr/local/zabbix-scripts/mysql.json 2>/var/log/zte-olt.err
