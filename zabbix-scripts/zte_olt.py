@@ -120,6 +120,18 @@ def get_onu_data_from_olt(device):
         cmd = "show mac gpon onu gpon-onu_1/1/1:{}".format(CURRENT_ONU["ONU_NUMBER"])
         reply_from_olt = conn.send_command(cmd, failed_when_contains=["%Error "])
         lines = reply_from_olt.result.split("\n")
+        macs = []
+        for l in lines[5:]:
+            m = l.split()
+            mac = {}
+            mac["mac"] = m[0]
+            mac["vlan"] = m[1]
+            mac["mode"] = m[2]
+            mac["interface"] = m[3]
+            mac["vport"] = m[5]
+            macs.append(mac)
+            CURRENT_ONU["MACS"] = macs
+        #jpp(macs)
         CURRENT_ONU["TOTAL_MAC_ADDRESSES"] = lines[0].split(":")[1].strip()
 
         #ONU уровни сигнала (оптического)
@@ -189,7 +201,7 @@ if __name__ == "__main__":
                     `PREV_SESSION_START_DATE`,  `PREV_SESSION_START_TIME`,      `PREV_SESSION_END_DATE`,
                     `PREV_SESSION_END_TIME`,    `TOTAL_MAC_ADDRESSES`,          `SIGNAL_LEVEL_UP_RX`,
                     `SIGNAL_LEVEL_UP_TX`,       `SIGNAL_LEVEL_UP_ATTENUATION`,  `SIGNAL_LEVEL_DOWN_RX`,
-                    `SIGNAL_LEVEL_DOWN_TX`,     `SIGNAL_LEVEL_DOWN_ATTENUATION`
+                    `SIGNAL_LEVEL_DOWN_TX`,     `SIGNAL_LEVEL_DOWN_ATTENUATION`, MACS
                     )
                         VALUES (
                                 %s, %s, %s,
@@ -208,7 +220,7 @@ if __name__ == "__main__":
                                 %s, %s, %s,
                                 %s, %s, %s,
                                 %s, %s, %s,
-                                %s, %s
+                                %s, %s, %s
                         )
                 """
             sql = sql.format(mysql_configuration['pon_table'])
@@ -230,7 +242,7 @@ if __name__ == "__main__":
                     ONU["PREV_SESSION_START_DATE"],     ONU["PREV_SESSION_START_TIME"],         ONU["PREV_SESSION_END_DATE"],
                     ONU["PREV_SESSION_END_TIME"],       ONU["TOTAL_MAC_ADDRESSES"],             ONU["SIGNAL_LEVEL_UP_RX"],
                     ONU["SIGNAL_LEVEL_UP_TX"],          ONU["SIGNAL_LEVEL_UP_ATTENUATION"],     ONU["SIGNAL_LEVEL_DOWN_RX"],
-                    ONU["SIGNAL_LEVEL_DOWN_TX"],        ONU["SIGNAL_LEVEL_DOWN_ATTENUATION"]
+                    ONU["SIGNAL_LEVEL_DOWN_TX"],        ONU["SIGNAL_LEVEL_DOWN_ATTENUATION"],   json.dumps(ONU["MACS"])
                 )
 
                 #print(sql % values)

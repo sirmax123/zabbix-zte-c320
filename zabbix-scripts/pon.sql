@@ -1,4 +1,3 @@
--- Structure for PON table
 CREATE TABLE IF NOT EXISTS pon_c320(
     `OLT_IP` varchar(16) not null default "127.0.0.1",
     `OLT_NAME` varchar(255) not null default "localhost",
@@ -49,5 +48,6 @@ CREATE TABLE IF NOT EXISTS pon_c320(
     `SIGNAL_LEVEL_UP_ATTENUATION` float,
     `SIGNAL_LEVEL_DOWN_RX` float,
     `SIGNAL_LEVEL_DOWN_TX` float,
-    `SIGNAL_LEVEL_DOWN_ATTENUATION`float
+    `SIGNAL_LEVEL_DOWN_ATTENUATION` float,
+    `MACS` text
 );
